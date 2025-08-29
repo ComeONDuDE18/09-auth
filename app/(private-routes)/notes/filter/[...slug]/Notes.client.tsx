@@ -51,10 +51,10 @@ const { data, isLoading, error, isSuccess } = useQuery<FetchNotesResponse>({
       {error && <p className={css.error}>Something went wrong.{error.message}</p>}
    
 
-       {data && data.total_pages > 1 && (   // було: data.totalPages
+       {data && data.total_pages > 1 && (   
   <Pagination
     currentPage={page}
-    totalPages={data.total_pages}    // було: data.totalPages
+    totalPages={data.total_pages}    
     onPageChange={setPage}
   />
 )}
@@ -62,8 +62,8 @@ const { data, isLoading, error, isSuccess } = useQuery<FetchNotesResponse>({
         <Link className={css.button} href="/notes/action/create">Create +</Link>
       </header>
 
-{isSuccess && (data.data?.length ?? 0) > 0 ? (  // було: data.notes.length
-  <NoteList notes={data.data} />                // було: data.notes
+{isSuccess && (data.data?.length ?? 0) > 0 ? (  
+  <NoteList notes={data.data} />                
 ) : (
   !isLoading && <p>No notes found</p>
 )}
