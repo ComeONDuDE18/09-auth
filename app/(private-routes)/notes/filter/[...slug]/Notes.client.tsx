@@ -12,7 +12,7 @@ import css from "./Notes.module.css";
 import NoteList from "@/components/NoteList/NoteList";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Pagination from "@/components/Pagination/Pagination";
-import type { FetchNotesResponse } from "@/lib/api/clientApi";
+import type { FetchNotesResponse } from "@/types/note";
 
 type NotesDetailsClientProps = {
   tag: string;
@@ -51,23 +51,22 @@ const { data, isLoading, error, isSuccess } = useQuery<FetchNotesResponse>({
       {error && <p className={css.error}>Something went wrong.{error.message}</p>}
    
 
-        {data && data.totalPages > 1 && (
-          <Pagination
-            currentPage={page}
-            totalPages={data.totalPages}
-            onPageChange={setPage}
-          />
-        )}
+       {data && data.total_pages > 1 && (   // було: data.totalPages
+  <Pagination
+    currentPage={page}
+    totalPages={data.total_pages}    // було: data.totalPages
+    onPageChange={setPage}
+  />
+)}
 
-       <Link className={css.button} href="/notes/action/create">Create +</Link>
+        <Link className={css.button} href="/notes/action/create">Create +</Link>
       </header>
 
-      {isSuccess && data.notes.length > 0 ? (
-        <NoteList notes={data.notes} />
-      ) : (
-        !isLoading && <p>No notes found</p>
-      )}
-
+{isSuccess && (data.data?.length ?? 0) > 0 ? (  // було: data.notes.length
+  <NoteList notes={data.data} />                // було: data.notes
+) : (
+  !isLoading && <p>No notes found</p>
+)}
 
     </div>
   );
