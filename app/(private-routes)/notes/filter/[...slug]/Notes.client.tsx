@@ -4,7 +4,7 @@
 import { useState, useEffect } from "react";
 import { useDebounce } from "use-debounce";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { fetchNotes } from "@/lib/api";
+import { fetchNotes } from "@/lib/api/clientApi";
 import Link from "next/link";
 
 
@@ -12,7 +12,7 @@ import css from "./Notes.module.css";
 import NoteList from "@/components/NoteList/NoteList";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Pagination from "@/components/Pagination/Pagination";
-import type { FetchNotesResponse } from "@/lib/api";
+import type { FetchNotesResponse } from "@/lib/api/clientApi";
 
 type NotesDetailsClientProps = {
   tag: string;
