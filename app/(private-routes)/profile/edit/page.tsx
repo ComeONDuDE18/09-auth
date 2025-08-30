@@ -46,7 +46,7 @@ export default function EditProfile() {
 
   const handleBack = () => router.back();
 
-  // Простий гард: якщо користувача ще немає, можна показати пустий контейнер/лоадер
+  
   if (!user) {
     return (
       <main className={css.mainContent}>
