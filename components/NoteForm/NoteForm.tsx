@@ -4,7 +4,7 @@ import css from "../NoteForm/NoteForm.module.css";
 import { createNote } from "../../lib/api/clientApi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import type { NewNoteData, NoteTag } from "@/types/note";
+import type { NewNoteData } from "@/types/note";
 import { useNoteDraftStore } from "@/lib/store/noteStore";
 import { useState } from "react";
 
@@ -29,7 +29,7 @@ export default function NoteForm({ onClose }: NoteFormProps) {
 
     const nextDraft: NewNoteData = {
       ...draft,
-      [name]: name === "tag" ? (value as NoteTag) : value,
+      [name] : value,
     } as NewNoteData;
 
     setDraft(nextDraft);
@@ -51,7 +51,7 @@ export default function NoteForm({ onClose }: NoteFormProps) {
   const toPayload = (formData: FormData): NewNoteData => {
     const title = String(formData.get("title") ?? "");
     const content = String(formData.get("content") ?? "");
-    const tag = (String(formData.get("tag") ?? "Todo") as NoteTag) || "Todo";
+    const tag = String(formData.get("tag")     ?? "Todo");
     return { title, content, tag };
   };
 
